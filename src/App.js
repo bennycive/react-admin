@@ -53,7 +53,7 @@ const App = () => {
           : "w-20"} duration-300 pt-8 p-5 relative`}
       >
         <MdMenuOpen
-          className={`bg-white text-3xl rounded-full -right-3 text-dark-purple absolute top-9  ${!open &&
+          className={`bg-white text-3xl rounded-md -right-3 text-dark-purple absolute top-9  ${!open &&
             "rotate-180"}  cursor-pointer border border-dark-purple`}
           onClick={() => setOpen(!open)}
         />
@@ -85,26 +85,6 @@ const App = () => {
               "hidden"} `}
           />
         </div>
-
-        {/* <ul className="pt-2">
-          {Menus.map((menu, index) =>
-            <>
-               <li key={index} className={`text-gray-300 text-sm flex items-center hover:text-dark-purple ${menu.spacing ? "mt-9":"mt-2"} gap-x-4 cursor-pointer p-2
-                 rounded hover:bg-light-white`}>
-                  <span className="text-2xl block float-left " ><RxDashboard /></span>
-                  <span className={`text-base font-medium  ${!open && "hidden"} flex-1`}>{menu.title}</span>
-                  {menu.submenu &&(
-                    <BsChevronDown className="" onClick={()=>{}} />
-                  )}
-               </li>
-               {menu.submenuItems.map((submenuItem, index)=>(
-                  <li key={index}>
-                   {submenuItem.title}
-                  </li>
-               ))}
-            </>
-          )}
-        </ul> */}
 
         <ul className="pt-2">
           {Menus.map((menu, index) =>
