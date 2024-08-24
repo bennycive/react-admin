@@ -1,7 +1,6 @@
-import React from "react";
-import { useState } from "react";
-import {  
-  BsSearch, 
+import React, { useState } from "react";
+import {
+  BsSearch,
   BsChevronDown,
   BsPeople,
   BsWrenchAdjustable,
@@ -14,51 +13,54 @@ import {
   BsBoxArrowInRight,
   BsPerson,
   BsFingerprint,
-  BsFront,
-    
- } from "react-icons/bs";
-
+  BsFront
+} from "react-icons/bs";
 import { RxDashboard } from "react-icons/rx";
 import { MdMenuOpen } from "react-icons/md";
+import Home from './home/Home';
 
 const App = () => {
   const [open, setOpen] = useState(true);
-  const [submenuOpen, setsubmenuOpen] = useState(false);
+  const [submenuOpen, setSubmenuOpen] = useState(false);
+  const [darkMode , setDarkMode] =useState(false);
 
   const Menus = [
-    { title: "Dashboard", icon:<RxDashboard /> },
+    { title: "Dashboard", icon: <RxDashboard /> },
     { title: "Users", icon: <BsPeople /> },
-    { title: "Settings", icon:<BsWrenchAdjustable /> },
-    { title: "Help", icon:<BsTelephoneForward /> },
-    { title: "Media", spacing: true, icon:<BsSkipStart /> },
+    { title: "Settings", icon: <BsWrenchAdjustable /> },
+    { title: "Help", icon: <BsTelephoneForward /> },
+    { title: "Media", spacing: true, icon: <BsSkipStart /> },
     {
-      title: "Projects", icon:<BsStickies />,
+      title: "Projects",
+      icon: <BsStickies />,
       submenu: true,
       submenuItems: [
-        { title: "Project 1", icon: <BsStars />},
-        { title: "Project 2", icon:<BsStack /> },
-        { title: "Project 3", icon:<BsStickies />}
+        { title: "Project 1", icon: <BsStars /> },
+        { title: "Project 2", icon: <BsStack /> },
+        { title: "Project 3", icon: <BsStickies /> }
       ]
     },
-    { title: "Biometric",icon:<BsFingerprint /> },
-    { title: "Reports",icon:<BsBodyText /> },
-    { title: "Profile",icon:<BsPerson />},
-    { title: "Logout",icon:<BsBoxArrowInRight /> }
+    { title: "Biometric", icon: <BsFingerprint /> },
+    { title: "Reports", icon: <BsBodyText /> },
+    { title: "Profile", icon: <BsPerson /> },
+    { title: "Logout", icon: <BsBoxArrowInRight /> }
   ];
+
   return (
-    <div className="flex">
+    <div className="flex h-screen" data-theme='coffee'>
+      {/* Sidebar */}
       <div
-        className={`bg-dark-purple h-screen ${open
+        className={` h-full ${open
           ? "w-60"
-          : "w-20"} duration-300 pt-8 p-5 relative`}
+          : "w-20"} duration-300 pt-8 p-5 relative flex-shrink-0`}
       >
         <MdMenuOpen
-          className={`bg-white text-3xl rounded-md -right-3 text-dark-purple absolute top-9  ${!open &&
-            "rotate-180"}  cursor-pointer border border-dark-purple`}
+          className={`bg-white text-3xl rounded-md -right-3 text-dark-purple absolute top-9 ${!open &&
+            "rotate-180"} cursor-pointer border border-dark-purple`}
           onClick={() => setOpen(!open)}
         />
         <div className="inline-flex">
-        <BsFront 
+          <BsFront
             className={`text-white text-4xl rounded cursor-pointer ${open &&
               "rotate-[360deg]"} duration-300 block float-left mr-2`}
           />
@@ -70,22 +72,19 @@ const App = () => {
           </h1>
         </div>
         <div
-          className={`flex items-center rounded-md bg-slate-50 mt-6 py-2 ${!open
-            ? "px-2.5"
-            : "px-2.5"} `}
+          className={`flex items-center rounded-md bg-slate-50 mt-6 py-2 px-2.5`}
         >
           <BsSearch
             className={`text-gray-400 cursor-pointer block float-left text-lg ${open &&
-              "mr-2 text-xl"} `}
+              "mr-2 text-xl"}`}
           />
           <input
-            type={"search"}
+            type="search"
             placeholder="Search ..."
             className={`text-base bg-transparent w-full focus:outline-none ${!open &&
-              "hidden"} `}
+              "hidden"}`}
           />
         </div>
-
         <ul className="pt-2">
           {Menus.map((menu, index) =>
             <React.Fragment key={index}>
@@ -95,7 +94,7 @@ const App = () => {
                   : "mt-2"} gap-x-4 cursor-pointer p-2 rounded hover:bg-light-white`}
               >
                 <span className="text-2xl block float-left">
-                   {menu.icon ? menu.icon : <RxDashboard />}
+                  {menu.icon ? menu.icon : <RxDashboard />}
                 </span>
                 <span
                   className={`text-base font-medium ${!open &&
@@ -106,13 +105,12 @@ const App = () => {
                 {menu.submenu &&
                   <BsChevronDown
                     className={`${submenuOpen && "rotate-180"}`}
-                    onClick={() => {
-                      setsubmenuOpen(!submenuOpen);
-                    }}
+                    onClick={() => setSubmenuOpen(!submenuOpen)}
                   />}
               </li>
               {/* Check if submenuItems exist before rendering */}
-              {menu.submenu && open &&
+              {menu.submenu &&
+                open &&
                 submenuOpen &&
                 menu.submenuItems &&
                 menu.submenuItems.length > 0 &&
@@ -130,8 +128,10 @@ const App = () => {
           )}
         </ul>
       </div>
-      <div className="p-7">
-        <h1 class="font-semibold text-black text-4xl">Home Page</h1>
+
+      {/* Main Content */}
+      <div className="flex-1 p-7 bg-gray-100">
+        <Home />
       </div>
     </div>
   );
